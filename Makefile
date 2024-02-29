@@ -34,7 +34,7 @@ OPTS0= -DRAND -DTERMIO #-DNOCONST
 # -DDES_UNROLL
 # after the initial build, run 'des_opts' to see which options are best
 # for your platform.  There are some listed in options.txt
-#OPTS2= -DDES_PTR 
+#OPTS2= -DDES_PTR
 #OPTS3= -DDES_RISC1 # or DES_RISC2
 #OPTS4= -DDES_UNROLL
 
@@ -51,8 +51,8 @@ CPP=$(CC) -E
 DES_ENC=des_enc.o	# normal C version
 #DES_ENC=asm/dx86-elf.o	# elf format x86
 #DES_ENC=asm/dx86-out.o	# a.out format x86
-#DES_ENC=asm/dx86-sol.o	# solaris format x86 
-#DES_ENC=asm/dx86bsdi.o	# bsdi format x86 
+#DES_ENC=asm/dx86-sol.o	# solaris format x86
+#DES_ENC=asm/dx86bsdi.o	# bsdi format x86
 
 LIBDIR=/usr/local/lib
 BINDIR=/usr/local/bin
@@ -171,7 +171,7 @@ depend:
 
 clean:
 	/bin/rm -f *.o tags core rpw destest des speed $(DLIB) .nfs* *.old \
-	*.bak destest rpw des_opts asm/*.o 
+	*.bak destest rpw des_opts asm/*.o
 
 dclean:
 	sed -e '/^# DO NOT DELETE THIS LINE/ q' Makefile >Makefile.new
