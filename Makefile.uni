@@ -10,7 +10,8 @@
 # If you are on a DEC Alpha, edit des.h and change the DES_LONG
 # define to 'unsigned int'.  I have seen this give a %20 speedup.
 
-OPTS0= -DRAND -DTERMIOS #-DNOCONST
+#OPTS0= -DRAND -DTERMIO #-DNOCONST
+OPTS0=-DMSDOS
 
 # Version 1.94 has changed the strings_to_key function so that it is
 # now compatible with MITs when the string is longer than 8 characters.
@@ -31,11 +32,11 @@ OPTS4= -DDES_UNROLL
 
 OPTS= $(OPTS0) $(OPTS1) $(OPTS2) $(OPTS3) $(OPTS4)
 
-CC=cc
-CFLAGS= -D_HPUX_SOURCE -Aa +O2 $(OPTS) $(CFLAG)
+#CC=cc
+#CFLAGS= -D_HPUX_SOURCE -Aa +O2 $(OPTS) $(CFLAG)
 
-#CC=gcc
-#CFLAGS= -O3 -fomit-frame-pointer $(OPTS) $(CFLAG)
+CC=gcc
+CFLAGS= -O3 -fomit-frame-pointer $(OPTS) $(CFLAG)
 
 CPP=$(CC) -E
 
@@ -86,22 +87,22 @@ DLIB=	libdes.a
 all: $(DLIB) destest rpw des speed des_opts
 
 cc:
-	make CC=cc CFLAGS="-O $(OPTS) $(CFLAG)" all
+	$(MAKE) CC=cc CFLAGS="-O $(OPTS) $(CFLAG)" all
 
 gcc:
-	make CC=gcc CFLAGS="-O3 -fomit-frame-pointer $(OPTS) $(CFLAG)" all
+	$(MAKE) CC=gcc CFLAGS="-O3 -fomit-frame-pointer $(OPTS) $(CFLAG)" all
 
 x86-elf:
-	make DES_ENC=asm/dx86-elf.o CC=gcc CFLAGS="-DELF -O3 -fomit-frame-pointer $(OPTS) $(CFLAG)" all
+	$(MAKE) DES_ENC=asm/dx86-elf.o CC=gcc CFLAGS="-DELF -O3 -fomit-frame-pointer $(OPTS) $(CFLAG)" all
 
 x86-out:
-	make DES_ENC=asm/dx86-out.o CC=gcc CFLAGS="-DOUT -O3 -fomit-frame-pointer $(OPTS) $(CFLAG)" all
+	$(MAKE) DES_ENC=asm/dx86-out.o CC=gcc CFLAGS="-DOUT -O3 -fomit-frame-pointer $(OPTS) $(CFLAG)" all
 
 x86-solaris:
-	make DES_ENC=asm/dx86-sol.o CFLAGS="-DSOL -O  $(OPTS) $(CFLAG)" all
+	$(MAKE) DES_ENC=asm/dx86-sol.o CFLAGS="-DSOL -O  $(OPTS) $(CFLAG)" all
 
 x86-bsdi:
-	make DES_ENC=asm/dx86bsdi.o CC=gcc CFLAGS="-DBSDI -O3 -fomit-frame-pointer $(OPTS) $(CFLAG)" all
+	$(MAKE) DES_ENC=asm/dx86bsdi.o CC=gcc CFLAGS="-DBSDI -O3 -fomit-frame-pointer $(OPTS) $(CFLAG)" all
 
 asm/dx86-elf.o: asm/dx86-cpp.s asm/dx86unix.cpp
 	$(CPP) -DELF asm/dx86unix.cpp | as -o asm/dx86-elf.o

@@ -388,8 +388,8 @@ void doencryption()
 
 	if (buf == NULL)
 		{
-		if (    (( buf=(unsigned char *)Malloc(BUFSIZE+8)) == NULL) ||
-			((obuf=(unsigned char *)Malloc(BUFSIZE+8)) == NULL))
+		if (    (( buf=(unsigned char *)malloc(BUFSIZE+8)) == NULL) ||
+			((obuf=(unsigned char *)malloc(BUFSIZE+8)) == NULL))
 			{
 			fputs("Not enough memory\n",stderr);
 			Exit=10;

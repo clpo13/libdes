@@ -69,7 +69,6 @@
 #include <unistd.h>
 #else
 #include <io.h>
-extern int exit();
 #endif
 #include <signal.h>
 #ifndef VMS
